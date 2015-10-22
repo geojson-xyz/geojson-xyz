@@ -1,13 +1,12 @@
 #!/usr/bin/env node
 
 var inquirer = require('inquirer'),
-  //https = require('https'),
   fs = require('fs'),
   chalk = require('chalk'),
   toClipboard = require('to-clipboard'),
   choices = require('./lib/choices'),
   fuzzy = require('./lib/fuzzy'),
-  get = require('./'),
+  getGeojson = require('./'),
   argv = require('yargs')
     .usage('Get GeoJSON\n$0')
     .boolean('all')
@@ -24,7 +23,7 @@ var options = {
 };
 
 if (argv._[0]) {
-  get(argv._[0], function (res, file) {
+  getGeojson(argv._[0], function (res, file) {
     if (argv._[0] === '--') {
       res.pipe(process.stdout);
     } else {
@@ -48,7 +47,7 @@ inquirer.prompt(choices(options), function(answers) {
     console.log(url);
     console.log(license);
   } else {
-    get(answers.file, function(res) {
+    getGeojson(answers.file, function(res) {
       res
         .on('end', function() {
           console.log('');
