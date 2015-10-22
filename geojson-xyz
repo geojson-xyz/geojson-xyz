@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 
 var inquirer = require('inquirer'),
-  https = require('https'),
+  //https = require('https'),
   fs = require('fs'),
   chalk = require('chalk'),
   toClipboard = require('to-clipboard'),
   choices = require('./lib/choices'),
   fuzzy = require('./lib/fuzzy'),
+  get = require('./'),
   argv = require('yargs')
     .usage('Get GeoJSON\n$0')
     .boolean('all')
@@ -23,12 +24,7 @@ var options = {
 };
 
 if (argv._[0]) {
-  var file = fuzzy(argv._[0], options);
-  if (!file) {
-    throw new Error('no file matched your query');
-  }
-  var url = base + naturalEarthSlug + '/' + file.original;
-  https.get(url, function(res) {
+  get(argv._[0], function (res, file) {
     if (argv._[0] === '--') {
       res.pipe(process.stdout);
     } else {
@@ -39,8 +35,6 @@ if (argv._[0]) {
         })
         .pipe(fs.createWriteStream(file.original));
     }
-  }).on('error', function(err) {
-    throw err;
   });
   return;
 }
@@ -54,7 +48,7 @@ inquirer.prompt(choices(options), function(answers) {
     console.log(url);
     console.log(license);
   } else {
-    https.get(url, function(res) {
+    get(answers.file, function(res) {
       res
         .on('end', function() {
           console.log('');
@@ -62,9 +56,6 @@ inquirer.prompt(choices(options), function(answers) {
           console.log(license);
         })
         .pipe(fs.createWriteStream(answers.file));
-    })
-    .on('error', function(err) {
-      throw err;
     });
   }
 });
