@@ -1,0 +1,56 @@
+#!/usr/bin/env node
+
+var inquirer = require('inquirer'),
+  https = require('https'),
+  fs = require('fs'),
+  chalk = require('chalk'),
+  toClipboard = require('to-clipboard'),
+  choices = require('./lib/choices'),
+  fuzzy = require('./lib/fuzzy');
+
+var base = 'https://s3.amazonaws.com/geojson-please/';
+var naturalEarthSlug = 'naturalearth-3.3.0';
+
+if (process.argv[2]) {
+  var file = fuzzy(process.argv[2]);
+  if (!file) {
+    throw new Error('no file matched your query');
+  }
+  var url = base + naturalEarthSlug + '/' + file.original;
+  https.get(url, function(res) {
+    if (process.argv[3] === '--') {
+      res.pipe(process.stdout);
+    } else {
+      res
+        .on('end', function() {
+          console.log(chalk.green('✓ ') + chalk.bold('saved as ' + file.original));
+        })
+        .pipe(fs.createWriteStream(file.original));
+    }
+  }).on('error', function(err) {
+    throw err;
+  });
+  return;
+}
+
+inquirer.prompt(choices, function(answers) {
+  var url = base + naturalEarthSlug + '/' + answers.file;
+  if (answers.output === 'URL to Clipboard') {
+    toClipboard(url);
+    console.log('');
+    console.log(chalk.green('✓ ') + chalk.bold('copied url to clipboard'));
+    console.log(url);
+  } else {
+    https.get(url, function(res) {
+      res
+        .on('end', function() {
+          console.log('');
+          console.log(chalk.green('✓ ') + chalk.bold('saved as ' + answers.file));
+        })
+        .pipe(fs.createWriteStream(answers.file));
+    })
+    .on('error', function(err) {
+      throw err;
+    });
+  }
+});

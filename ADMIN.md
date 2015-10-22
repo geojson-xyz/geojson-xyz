@@ -1,0 +1,1 @@
+aws s3 cp natural-earth-geojson  s3://geojson-please/naturalearth-3.3.0/ --content-type="application/vnd.geo+json" --acl=public-read --cache-control=public --expires="Thu, 01 Dec 2017 16:00:00 GMT" --include "*.geojson"

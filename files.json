@@ -1,0 +1,219 @@
+{
+  "naturalearth-3.3.0": {
+    "water": {
+      "oceans": [
+        "ne_110m_ocean.geojson",
+        "ne_50m_ocean.geojson",
+        "ne_10m_ocean.geojson",
+        "ne_10m_ocean_scale_rank.geojson"
+      ],
+      "lakes": [
+        "ne_50m_lakes.geojson",
+        "ne_50m_lakes_historic.geojson",
+        "ne_110m_rivers_lake_centerlines.geojson",
+        "ne_50m_rivers_lake_centerlines.geojson",
+        "ne_50m_rivers_lake_centerlines_scale_rank.geojson",
+        "ne_110m_lakes.geojson",
+        "ne_10m_lakes.geojson",
+        "ne_10m_rivers_lake_centerlines.geojson",
+        "ne_10m_rivers_lake_centerlines_scale_rank.geojson",
+        "ne_10m_lakes_historic.geojson",
+        "ne_10m_lakes_north_america.geojson",
+        "ne_10m_lakes_pluvial.geojson",
+        "ne_10m_lakes_europe.geojson"
+      ],
+      "other": [
+        "ne_10m_reefs.geojson",
+        "ne_10m_geography_marine_polys.geojson",
+        "ne_10m_rivers_europe.geojson",
+        "ne_10m_rivers_north_america.geojson",
+        "ne_50m_playas.geojson",
+        "ne_50m_coastline.geojson",
+        "ne_110m_coastline.geojson"
+      ],
+      "bathymetry": [
+        "ne_10m_bathymetry_A_10000.geojson",
+        "ne_10m_bathymetry_B_9000.geojson",
+        "ne_10m_bathymetry_C_8000.geojson",
+        "ne_10m_bathymetry_D_7000.geojson",
+        "ne_10m_bathymetry_E_6000.geojson",
+        "ne_10m_bathymetry_F_5000.geojson",
+        "ne_10m_bathymetry_G_4000.geojson",
+        "ne_10m_bathymetry_H_3000.geojson",
+        "ne_10m_bathymetry_I_2000.geojson",
+        "ne_10m_bathymetry_J_1000.geojson",
+        "ne_10m_bathymetry_K_200.geojson",
+        "ne_10m_bathymetry_L_0.geojson"
+      ],
+      "ice": [
+        "ne_10m_glaciated_areas.geojson",
+        "ne_50m_glaciated_areas.geojson",
+        "ne_110m_glaciated_areas.geojson",
+        "ne_50m_antarctic_ice_shelves_lines.geojson",
+        "ne_50m_antarctic_ice_shelves_polys.geojson",
+        "ne_10m_antarctic_ice_shelves_lines.geojson",
+        "ne_10m_antarctic_ice_shelves_polys.geojson"
+      ]
+    },
+    "political": {
+      "countries": [
+        "ne_50m_admin_0_tiny_countries.geojson",
+        "ne_50m_admin_0_tiny_countries_scale_rank.geojson",
+        "ne_110m_admin_0_countries.geojson",
+        "ne_10m_admin_0_countries.geojson",
+        "ne_10m_admin_0_countries_lakes.geojson",
+        "ne_110m_admin_0_countries_lakes.geojson",
+        "ne_50m_admin_0_countries.geojson",
+        "ne_110m_admin_0_tiny_countries.geojson",
+        "ne_50m_admin_0_countries_lakes.geojson"
+      ],
+      "states": [
+        "ne_50m_admin_1_states_provinces.geojson",
+        "ne_50m_admin_1_states_provinces_lakes.geojson",
+        "ne_50m_admin_1_states_provinces_lakes_shp.geojson",
+        "ne_50m_admin_1_states_provinces_lines.geojson",
+        "ne_50m_admin_1_states_provinces_scale_rank.geojson",
+        "ne_50m_admin_1_states_provinces_shp.geojson",
+        "ne_50m_admin_1_states_provinces_shp_scale_rank.geojson",
+        "ne_10m_admin_1_states_provinces.geojson",
+        "ne_10m_admin_1_states_provinces_lakes.geojson",
+        "ne_10m_admin_1_states_provinces_lakes_shp.geojson",
+        "ne_10m_admin_1_states_provinces_lines.geojson",
+        "ne_10m_admin_1_states_provinces_scale_rank.geojson",
+        "ne_10m_admin_1_states_provinces_shp.geojson",
+        "ne_110m_admin_1_states_provinces_shp_scale_rank.geojson",
+        "ne_110m_admin_1_states_provinces.geojson",
+        "ne_110m_admin_1_states_provinces_lakes.geojson",
+        "ne_110m_admin_1_states_provinces_lakes_shp.geojson",
+        "ne_110m_admin_1_states_provinces_lines.geojson",
+        "ne_110m_admin_1_states_provinces_scale_rank.geojson",
+        "ne_110m_admin_1_states_provinces_shp.geojson"
+      ],
+      "boundaries": [
+        "ne_10m_admin_0_boundary_lines_disputed_areas.geojson",
+        "ne_10m_admin_0_boundary_lines_land.geojson",
+        "ne_10m_admin_0_boundary_lines_map_units.geojson",
+        "ne_10m_admin_0_boundary_lines_maritime_indicator.geojson",
+        "ne_110m_admin_0_boundary_lines_land.geojson",
+        "ne_50m_admin_0_boundary_lines_disputed_areas.geojson",
+        "ne_50m_admin_0_boundary_lines_land.geojson",
+        "ne_50m_admin_0_boundary_lines_maritime_indicator.geojson",
+        "ne_50m_admin_0_boundary_map_units.geojson"
+      ],
+      "other": [
+        "ne_110m_admin_0_map_units.geojson",
+        "ne_110m_admin_0_pacific_groupings.geojson",
+        "ne_110m_admin_0_scale_rank.geojson",
+        "ne_110m_admin_0_sovereignty.geojson",
+        "ne_50m_admin_0_breakaway_disputed_areas.geojson",
+        "ne_50m_admin_0_map_subunits.geojson",
+        "ne_50m_admin_0_map_units.geojson",
+        "ne_50m_admin_0_pacific_groupings.geojson",
+        "ne_50m_admin_0_scale_rank.geojson",
+        "ne_50m_admin_0_sovereignty.geojson",
+        "ne_10m_admin_0_antarctic_claim_limit_lines.geojson",
+        "ne_10m_admin_0_antarctic_claims.geojson",
+        "ne_10m_admin_0_disputed_areas.geojson",
+        "ne_10m_admin_0_disputed_areas_scale_rank_minor_islands.geojson",
+        "ne_10m_admin_0_label_points.geojson",
+        "ne_10m_admin_0_map_subunits.geojson",
+        "ne_10m_admin_0_map_units.geojson",
+        "ne_10m_admin_0_pacific_groupings.geojson",
+        "ne_10m_admin_0_scale_rank.geojson",
+        "ne_10m_admin_0_scale_rank_minor_islands.geojson",
+        "ne_10m_admin_0_seams.geojson",
+        "ne_10m_admin_0_sovereignty.geojson",
+        "ne_10m_admin_1_label_points.geojson",
+        "ne_10m_admin_1_seams.geojson"
+      ]
+    },
+    "people": {
+      "areas": [
+        "ne_50m_urban_areas.geojson",
+        "ne_10m_populated_places.geojson",
+        "ne_10m_populated_places_simple.geojson",
+        "ne_50m_populated_places.geojson",
+        "ne_50m_populated_places_simple.geojson",
+        "ne_110m_populated_places.geojson",
+        "ne_110m_populated_places_simple.geojson",
+        "ne_10m_urban_areas.geojson"
+      ],
+      "transport": [
+        "ne_10m_airports.geojson",
+        "ne_10m_ports.geojson",
+        "ne_10m_railroads.geojson",
+        "ne_10m_roads.geojson",
+        "ne_10m_railroads_north_america.geojson"
+      ]
+    },
+    "land": {
+      "all land": [
+        "ne_10m_land.geojson",
+        "ne_50m_land.geojson",
+        "ne_110m_land.geojson"
+      ],
+      "islands": [
+        "ne_10m_minor_islands.geojson",
+        "ne_10m_minor_islands_coastline.geojson",
+        "ne_10m_minor_islands_label_points.geojson"
+      ],
+      "parks": [
+        "ne_10m_parks_and_protected_lands_area.geojson",
+        "ne_10m_parks_and_protected_lands_line.geojson",
+        "ne_10m_parks_and_protected_lands_point.geojson",
+        "ne_10m_parks_and_protected_lands_scale_rank.geojson"
+      ],
+      "coasts": [
+        "ne_10m_playas.geojson",
+        "ne_10m_coastline.geojson",
+        "ne_10m_land_ocean_label_points.geojson",
+        "ne_10m_land_ocean_seams.geojson",
+        "ne_10m_land_scale_rank.geojson",
+        "ne_110m_geography_marine_polys.geojson",
+        "ne_50m_geography_marine_polys.geojson"
+      ],
+      "regions": [
+        "ne_50m_geography_regions_elevation_points.geojson",
+        "ne_50m_geographic_lines.geojson",
+        "ne_50m_geography_regions_points.geojson",
+        "ne_50m_geography_regions_polys.geojson",
+        "ne_10m_geography_regions_elevation_points.geojson",
+        "ne_10m_geography_regions_points.geojson",
+        "ne_10m_geography_regions_polys.geojson",
+        "ne_110m_geography_regions_elevation_points.geojson",
+        "ne_10m_geographic_lines.geojson",
+        "ne_110m_geography_regions_points.geojson",
+        "ne_110m_geography_regions_polys.geojson"
+      ]
+    },
+    "utilities": {
+      "graticules": [
+        "ne_50m_graticules_1.geojson",
+        "ne_50m_graticules_10.geojson",
+        "ne_50m_graticules_15.geojson",
+        "ne_50m_graticules_20.geojson",
+        "ne_10m_graticules_1.geojson",
+        "ne_10m_graticules_10.geojson",
+        "ne_10m_graticules_15.geojson",
+        "ne_10m_graticules_20.geojson",
+        "ne_10m_graticules_30.geojson",
+        "ne_10m_graticules_5.geojson",
+        "ne_50m_graticules_30.geojson",
+        "ne_50m_graticules_5.geojson",
+        "ne_110m_graticules_1.geojson",
+        "ne_110m_graticules_10.geojson",
+        "ne_110m_graticules_15.geojson",
+        "ne_110m_graticules_20.geojson",
+        "ne_110m_graticules_30.geojson",
+        "ne_110m_graticules_5.geojson"
+      ],
+      "misc": [
+        "ne_10m_time_zones.geojson",
+        "ne_10m_wgs84_bounding_box.geojson",
+        "ne_50m_wgs84_bounding_box.geojson",
+        "ne_110m_wgs84_bounding_box.geojson",
+        "ne_110m_geographic_lines.geojson"
+      ]
+    }
+  }
+}
