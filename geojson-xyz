@@ -6,24 +6,36 @@ var inquirer = require('inquirer'),
   chalk = require('chalk'),
   toClipboard = require('to-clipboard'),
   choices = require('./lib/choices'),
-  fuzzy = require('./lib/fuzzy');
+  fuzzy = require('./lib/fuzzy'),
+  argv = require('yargs')
+    .usage('Get GeoJSON\n$0')
+    .boolean('all')
+    .describe('all', 'show files that are bigger than 2MB')
+    .help('help')
+    .argv;
 
 var base = 'https://s3.amazonaws.com/geojson-please/';
 var naturalEarthSlug = 'naturalearth-3.3.0';
+var license = 'SOURCE: http://www.naturalearthdata.com/ Public Domain (no restrictions)';
 
-if (process.argv[2]) {
-  var file = fuzzy(process.argv[2]);
+var options = {
+  all: argv.all
+};
+
+if (argv._[0]) {
+  var file = fuzzy(argv._[0], options);
   if (!file) {
     throw new Error('no file matched your query');
   }
   var url = base + naturalEarthSlug + '/' + file.original;
   https.get(url, function(res) {
-    if (process.argv[3] === '--') {
+    if (argv._[0] === '--') {
       res.pipe(process.stdout);
     } else {
       res
         .on('end', function() {
           console.log(chalk.green('✓ ') + chalk.bold('saved as ' + file.original));
+          console.log(license);
         })
         .pipe(fs.createWriteStream(file.original));
     }
@@ -33,19 +45,21 @@ if (process.argv[2]) {
   return;
 }
 
-inquirer.prompt(choices, function(answers) {
+inquirer.prompt(choices(options), function(answers) {
   var url = base + naturalEarthSlug + '/' + answers.file;
   if (answers.output === 'URL to Clipboard') {
     toClipboard(url);
     console.log('');
     console.log(chalk.green('✓ ') + chalk.bold('copied url to clipboard'));
     console.log(url);
+    console.log(license);
   } else {
     https.get(url, function(res) {
       res
         .on('end', function() {
           console.log('');
           console.log(chalk.green('✓ ') + chalk.bold('saved as ' + answers.file));
+          console.log(license);
         })
         .pipe(fs.createWriteStream(answers.file));
     })

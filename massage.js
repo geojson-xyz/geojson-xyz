@@ -1,5 +1,6 @@
 var fs = require('fs');
 
+/*
 fs.readdirSync('./').filter(function(f) {
   return f.match(/geojson$/);
 }).forEach(function(f) {
@@ -16,3 +17,12 @@ fs.readdirSync('./').filter(function(f) {
 
   fs.writeFileSync(f, JSON.stringify(geojson));
 });
+*/
+
+fs.writeFileSync('sizes.json', JSON.stringify(
+  fs.readdirSync('./').filter(function(f) {
+    return f.match(/geojson$/);
+  }).reduce(function(memo, f) {
+    memo[f] = fs.statSync(f).size;
+    return memo;
+  }, {}), null, 2));
