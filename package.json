@@ -4,7 +4,7 @@
   "description": "simply get some geojson",
   "main": "index.js",
   "bin": {
-    "geojson-xyz": "geojson-xyz"
+    "geojson-xyz": "./geojson-xyz"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
