@@ -23,3 +23,16 @@ After installing, just run `geojson-xyz`.
 All praise to [Natural Earth Data](http://www.naturalearthdata.com/) as
 the source of the majority of the data exposed in this interface. This is
 mostly a different way to access that data.
+
+## goes well with
+
+Running
+
+    geojson-xyz airports --
+
+Means "fuzzy-match airports and output results to stdout". You can substitute
+anything else for 'airports'. Outputting to stdout means you can pipe that
+GeoJSON places - for instance, if you have [geojsonio-cli](https://github.com/mapbox/geojsonio-cli)
+installed, pipe it to `geojsonio`!
+
+![](http://i.imgur.com/qnNYm8V.gif)
