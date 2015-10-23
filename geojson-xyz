@@ -5,7 +5,6 @@ var inquirer = require('inquirer'),
   chalk = require('chalk'),
   toClipboard = require('to-clipboard'),
   choices = require('./lib/choices'),
-  fuzzy = require('./lib/fuzzy'),
   getGeojson = require('./'),
   argv = require('yargs')
     .usage('Get GeoJSON\n$0')
