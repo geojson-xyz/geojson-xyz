@@ -1,12 +1,11 @@
 #!/usr/bin/env node
 
 var inquirer = require('inquirer'),
-  https = require('https'),
   fs = require('fs'),
   chalk = require('chalk'),
   toClipboard = require('to-clipboard'),
   choices = require('./lib/choices'),
-  fuzzy = require('./lib/fuzzy'),
+  getGeojson = require('./'),
   argv = require('yargs')
     .usage('Get GeoJSON\n$0')
     .boolean('all')
@@ -23,24 +22,16 @@ var options = {
 };
 
 if (argv._[0]) {
-  var file = fuzzy(argv._[0], options);
-  if (!file) {
-    throw new Error('no file matched your query');
-  }
-  var url = base + naturalEarthSlug + '/' + file.original;
-  https.get(url, function(res) {
-    if (argv._[0] === '--') {
-      res.pipe(process.stdout);
+  getGeojson(argv._[0], function (err, result) {
+    if (err) throw new Error(err);
+
+    if (argv._[1] === '--') {
+      console.log(JSON.stringify(result.geojson))
     } else {
-      res
-        .on('end', function() {
-          console.log(chalk.green('✓ ') + chalk.bold('saved as ' + file.original));
-          console.log(license);
-        })
-        .pipe(fs.createWriteStream(file.original));
+      console.log(chalk.green('✓ ') + chalk.bold('saved as ' + result.file));
+      console.log(license);
+      fs.writeFileSync(result.file, JSON.stringify(result.geojson));
     }
-  }).on('error', function(err) {
-    throw err;
   });
   return;
 }
@@ -54,17 +45,11 @@ inquirer.prompt(choices(options), function(answers) {
     console.log(url);
     console.log(license);
   } else {
-    https.get(url, function(res) {
-      res
-        .on('end', function() {
-          console.log('');
-          console.log(chalk.green('✓ ') + chalk.bold('saved as ' + answers.file));
-          console.log(license);
-        })
-        .pipe(fs.createWriteStream(answers.file));
-    })
-    .on('error', function(err) {
-      throw err;
+    getGeojson(answers.file, function(err, result) {
+      fs.writeFileSync(result.file, JSON.stringify(result.geojson));
+      console.log('');
+      console.log(chalk.green('✓ ') + chalk.bold('saved as ' + result.file));
+      console.log(license);
     });
   }
 });
