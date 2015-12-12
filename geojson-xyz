@@ -13,7 +13,6 @@ var inquirer = require('inquirer'),
     .help('help')
     .argv;
 
-var base = 'https://s3.amazonaws.com/geojson-please/';
 var naturalEarthSlug = 'naturalearth-3.3.0';
 var license = 'SOURCE: http://www.naturalearthdata.com/ Public Domain (no restrictions)';
 
@@ -37,7 +36,7 @@ if (argv._[0]) {
 }
 
 inquirer.prompt(choices(options), function(answers) {
-  var url = base + naturalEarthSlug + '/' + answers.file;
+  var url = answers.file.url;
   if (answers.output === 'URL to Clipboard') {
     toClipboard(url);
     console.log('');

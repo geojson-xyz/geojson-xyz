@@ -28,6 +28,7 @@
   "dependencies": {
     "chalk": "^1.1.1",
     "fuzzy": "^0.1.1",
+    "geojson-xyz-data": "^3.0.0",
     "inquirer": "^0.10.1",
     "minimist": "^1.2.0",
     "to-clipboard": "^0.2.0",
