@@ -5,7 +5,7 @@ var inquirer = require('inquirer'),
   chalk = require('chalk'),
   toClipboard = require('to-clipboard'),
   choices = require('./lib/choices'),
-  getGeojson = require('./'),
+  xyz = require('./'),
   argv = require('yargs')
     .usage('Get GeoJSON\n$0')
     .boolean('all')
@@ -21,33 +21,33 @@ var options = {
 };
 
 if (argv._[0]) {
-  getGeojson(argv._[0], function (err, result) {
+  xyz.getGeoJSON(argv._[0], function (err, result) {
     if (err) throw new Error(err);
 
+
     if (argv._[1] === '--') {
-      console.log(JSON.stringify(result.geojson))
+      console.log(JSON.stringify(result.data))
     } else {
-      console.log(chalk.green('✓ ') + chalk.bold('saved as ' + result.file));
+      console.log(chalk.green('✓ ') + chalk.bold('saved as ' + result.file.name));
       console.log(license);
-      fs.writeFileSync(result.file, JSON.stringify(result.geojson));
+      fs.writeFileSync(result.file.name, JSON.stringify(result.data));
     }
   });
   return;
 }
 
 inquirer.prompt(choices(options), function(answers) {
-  var url = answers.file.url;
   if (answers.output === 'URL to Clipboard') {
-    toClipboard(url);
+    toClipboard(answers.file.url);
     console.log('');
     console.log(chalk.green('✓ ') + chalk.bold('copied url to clipboard'));
-    console.log(url);
+    console.log(answers.file.url);
     console.log(license);
   } else {
-    getGeojson(answers.file, function(err, result) {
-      fs.writeFileSync(result.file, JSON.stringify(result.geojson));
+    xyz.getURL(answers.file.url, function(err, result) {
+      fs.writeFileSync(answers.file.name, JSON.stringify(result));
       console.log('');
-      console.log(chalk.green('✓ ') + chalk.bold('saved as ' + result.file));
+      console.log(chalk.green('✓ ') + chalk.bold('saved as ' + answers.file.name));
       console.log(license);
     });
   }
