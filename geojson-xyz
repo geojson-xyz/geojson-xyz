@@ -54,7 +54,7 @@ if (argv._[0]) {
           } else {
             console.log(chalk.green('✓ ') + chalk.bold('saved as ' + result.file.name));
             console.log(license);
-            fs.writeFileSync(result.file.name, JSON.stringify(result.data));
+            fs.writeFileSync(result.file.name, JSON.stringify(data));
           }
 
           done();
