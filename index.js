@@ -22,13 +22,14 @@ function getURL(url, callback) {
  * @returns {undefined} calls callback
  */
 function getGeoJSON(fileSearch, callback) {
-  var file = fuzzy(fileSearch);
-  if (!file) return callback('no file matched your query', null);
-  getURL(file.original.url, function (err, res) {
+  fuzzy(fileSearch, function (err, match) {
+    if (!match) return callback('no file matched your query', null);
+    getURL(match.original.url, function (err, res) {
       if (err) throw err;
-      callback(null, { data: res, file: file.original });
+      callback(null, { data: res, file: match.original, match: match });
+    });
   });
-};
+}
 
 module.exports.getGeoJSON = getGeoJSON;
 module.exports.getURL = getURL;

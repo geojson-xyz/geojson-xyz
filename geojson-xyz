@@ -23,6 +23,11 @@ if (argv._[0]) {
   xyz.getGeoJSON(argv._[0], function (err, result) {
     if (err) throw new Error(err);
 
+    if (result.match.value && result.data.type === 'FeatureCollection') {
+      result.data.features = result.data.features.filter(function (feat) {
+        return feat.properties[result.match.property] === result.match.value;
+      });
+    }
 
     if (argv._[1] === '-') {
       console.log(JSON.stringify(result.data));
