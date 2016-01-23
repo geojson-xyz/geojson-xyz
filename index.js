@@ -14,10 +14,12 @@ function getGeoJSON(search, options, callback) {
     if (!matches.length) return callback('no file matched your query', null);
     var topMatch = matches[0];
     matches = matches.filter(function (match, i) {
+      // filter any matches that aren't tied for first place, match-score-wise
       if (!options.all) { return i === 0; }
       return match.score === topMatch.score;
     })
     .map(function (match) {
+      // simplify the struct
       return {
         file: match.original,
         featureMatch: match.value ? {
@@ -26,8 +28,21 @@ function getGeoJSON(search, options, callback) {
         } : false,
         score: match.score
       };
-    });
-    return callback(null, matches);
+    })
+    .reduce(function (memo, match) {
+      // combine multiple matches from the same file, making `featureMatch` into
+      // an array of all the ones from that file.
+      var previous = memo[match.file.name];
+      if (!previous) {
+        memo[match.file.name] = match;
+        match.featureMatch = match.featureMatch ? [match.featureMatch] : false;
+      } else if (previous.featureMatch && match.featureMatch) {
+        previous.featureMatch.push(match.featureMatch);
+      }
+      return memo;
+    }, {});
+
+    return callback(null, Object.keys(matches).map(function (k) { return matches[k]; }));
   });
 }
 
