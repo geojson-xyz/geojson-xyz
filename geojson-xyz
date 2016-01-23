@@ -13,7 +13,6 @@ var inquirer = require('inquirer'),
     .help('help')
     .argv;
 
-var naturalEarthSlug = 'naturalearth-3.3.0';
 var license = 'SOURCE: http://www.naturalearthdata.com/ Public Domain (no restrictions)';
 
 var options = {
@@ -25,8 +24,8 @@ if (argv._[0]) {
     if (err) throw new Error(err);
 
 
-    if (argv._[1] === '--') {
-      console.log(JSON.stringify(result.data))
+    if (argv._[1] === '-') {
+      console.log(JSON.stringify(result.data));
     } else {
       console.log(chalk.green('✓ ') + chalk.bold('saved as ' + result.file.name));
       console.log(license);
