@@ -33,6 +33,7 @@
     "geojson-xyz-data": "anandthakker/geojson-xyz-data#aea16ebbd79eb5ed893e0e686a0a8aea0cb37afe",
     "inquirer": "^0.10.1",
     "minimist": "^1.2.0",
+    "queue-async": "^1.2.0",
     "to-clipboard": "^0.2.0",
     "yargs": "^3.29.0"
   },

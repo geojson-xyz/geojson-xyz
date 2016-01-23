@@ -5,6 +5,7 @@ var inquirer = require('inquirer'),
   chalk = require('chalk'),
   toClipboard = require('to-clipboard'),
   geojsonStream = require('geojson-stream'),
+  queue = require('queue-async'),
   choices = require('./lib/choices'),
   xyz = require('./'),
   argv = require('yargs')
@@ -26,7 +27,7 @@ var options = {
 
 if (argv._[0]) {
   var stream;
-  if (argv._[1] === '-') {
+  if (argv._[1] === '-' || !process.stdout.isTTY) {
     stream = geojsonStream.stringify();
     stream.pipe(process.stdout);
   }
@@ -35,25 +36,35 @@ if (argv._[0]) {
     if (err) throw new Error(err);
     if (argv.metadataOnly) { return console.log(JSON.stringify(results, null, 2)); }
 
+    var q = queue();
     results.forEach(function (result) {
-      xyz.getURL(result.file.url, function (err, data) {
-        if (err) throw new Error(err);
+      q.defer(function (done) {
+        xyz.getURL(result.file.url, function (err, data) {
+          if (err) return done(err);
 
-        if (options.filter && result.featureMatch && data.type === 'FeatureCollection') {
-          data.features = data.features.filter(function (feat) {
-            return feat.properties[result.featureMatch.property] === result.featureMatch.value;
-          });
-        }
+          if (options.filter && result.featureMatch && data.type === 'FeatureCollection') {
+            data.features = data.features.filter(function (feat) {
+              return feat.properties[result.featureMatch.property] === result.featureMatch.value;
+            });
+          }
 
-        if (stream) {
-          var features = data.type === 'FeatureCollection' ? data.features : [data];
-          features.forEach(function (feat) { stream.write(feat); });
-        } else {
-          console.log(chalk.green('✓ ') + chalk.bold('saved as ' + result.file.name));
-          console.log(license);
-          fs.writeFileSync(result.file.name, JSON.stringify(result.data));
-        }
+          if (stream) {
+            var features = data.type === 'FeatureCollection' ? data.features : [data];
+            features.forEach(function (feat) { stream.write(feat); });
+          } else {
+            console.log(chalk.green('✓ ') + chalk.bold('saved as ' + result.file.name));
+            console.log(license);
+            fs.writeFileSync(result.file.name, JSON.stringify(result.data));
+          }
+
+          done();
+        });
       });
+    });
+
+    q.awaitAll(function (err) {
+      if (err) throw new Error(err);
+      if (stream) { stream.end(); }
     });
   });
   return;
