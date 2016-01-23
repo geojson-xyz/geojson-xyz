@@ -44,7 +44,16 @@ if (argv._[0]) {
 
           if (options.filter && result.featureMatch && data.type === 'FeatureCollection') {
             data.features = data.features.filter(function (feat) {
-              return feat.properties[result.featureMatch.property] === result.featureMatch.value;
+              // manually iterate properties so we can be insensitive to letter
+              // case of keys
+              for (var key in feat.properties) {
+                if (key.toLowerCase() === result.featureMatch.property.toLowerCase()
+                    && feat.properties[key] === result.featureMatch.value) {
+                  return true;
+                }
+              }
+
+              return false;
             });
           }
 
