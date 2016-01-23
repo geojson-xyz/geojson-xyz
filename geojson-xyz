@@ -4,38 +4,57 @@ var inquirer = require('inquirer'),
   fs = require('fs'),
   chalk = require('chalk'),
   toClipboard = require('to-clipboard'),
+  geojsonStream = require('geojson-stream'),
   choices = require('./lib/choices'),
   xyz = require('./'),
   argv = require('yargs')
     .usage('Get GeoJSON\n$0')
     .boolean('all')
-    .describe('all', 'show files that are bigger than 2MB')
+    .describe('all', 'Get data from all files matching your search.')
+    .default('all', false)
+    .describe('filter', 'When the search matches a feature name within a file, filter that file\'s data down to the matching feature or features.')
+    .default('filter', true)
     .help('help')
     .argv;
 
 var license = 'SOURCE: http://www.naturalearthdata.com/ Public Domain (no restrictions)';
 
 var options = {
-  all: argv.all
+  all: argv.all,
+  filter: argv.filter
 };
 
 if (argv._[0]) {
-  xyz.getGeoJSON(argv._[0], function (err, result) {
+  var stream;
+  if (argv._[1] === '-') {
+    stream = geojsonStream.stringify();
+    stream.pipe(process.stdout);
+  }
+
+  xyz.getGeoJSON(argv._[0], argv, function (err, results) {
     if (err) throw new Error(err);
+    if (argv.metadataOnly) { return console.log(JSON.stringify(results, null, 2)); }
 
-    if (result.match.value && result.data.type === 'FeatureCollection') {
-      result.data.features = result.data.features.filter(function (feat) {
-        return feat.properties[result.match.property] === result.match.value;
+    results.forEach(function (result) {
+      xyz.getURL(result.file.url, function (err, data) {
+        if (err) throw new Error(err);
+
+        if (options.filter && result.featureMatch && data.type === 'FeatureCollection') {
+          data.features = data.features.filter(function (feat) {
+            return feat.properties[result.featureMatch.property] === result.featureMatch.value;
+          });
+        }
+
+        if (stream) {
+          var features = data.type === 'FeatureCollection' ? data.features : [data];
+          features.forEach(function (feat) { stream.write(feat); });
+        } else {
+          console.log(chalk.green('✓ ') + chalk.bold('saved as ' + result.file.name));
+          console.log(license);
+          fs.writeFileSync(result.file.name, JSON.stringify(result.data));
+        }
       });
-    }
-
-    if (argv._[1] === '-') {
-      console.log(JSON.stringify(result.data));
-    } else {
-      console.log(chalk.green('✓ ') + chalk.bold('saved as ' + result.file.name));
-      console.log(license);
-      fs.writeFileSync(result.file.name, JSON.stringify(result.data));
-    }
+    });
   });
   return;
 }

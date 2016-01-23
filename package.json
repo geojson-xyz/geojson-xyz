@@ -29,6 +29,7 @@
     "chalk": "^1.1.1",
     "csv-parser": "^1.9.2",
     "fuzzy": "^0.1.1",
+    "geojson-stream": "0.0.1",
     "geojson-xyz-data": "anandthakker/geojson-xyz-data#aea16ebbd79eb5ed893e0e686a0a8aea0cb37afe",
     "inquirer": "^0.10.1",
     "minimist": "^1.2.0",
