@@ -30,7 +30,7 @@
     "csv-parser": "^1.9.2",
     "fuzzy": "^0.1.1",
     "geojson-stream": "0.0.1",
-    "geojson-xyz-data": "anandthakker/geojson-xyz-data#1521ff8a18189095e651208ea4e09d4d2d9a74d4",
+    "geojson-xyz-data": "^3.1.0",
     "inquirer": "^0.10.1",
     "minimist": "^1.2.0",
     "queue-async": "^1.2.0",
