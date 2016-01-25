@@ -35,4 +35,4 @@ anything else for 'airports'. Outputting to stdout means you can pipe that
 GeoJSON places - for instance, if you have [geojsonio-cli](https://github.com/mapbox/geojsonio-cli)
 installed, pipe it to `geojsonio`!
 
-![](http://i.imgur.com/qnNYm8V.gif)
+![](demos/demo-3.gif)
