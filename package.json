@@ -7,7 +7,7 @@
     "geojson-xyz": "./geojson-xyz"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tap test/*.js"
   },
   "repository": {
     "type": "git",
@@ -27,11 +27,17 @@
   "homepage": "https://github.com/tmcw/geojson-xyz#readme",
   "dependencies": {
     "chalk": "^1.1.1",
+    "csv-parser": "^1.9.2",
     "fuzzy": "^0.1.1",
-    "geojson-xyz-data": "^3.0.0",
+    "geojson-stream": "0.0.1",
+    "geojson-xyz-data": "^3.1.0",
     "inquirer": "^0.10.1",
     "minimist": "^1.2.0",
+    "queue-async": "^1.2.0",
     "to-clipboard": "^0.2.0",
     "yargs": "^3.29.0"
+  },
+  "devDependencies": {
+    "tap": "^5.1.1"
   }
 }

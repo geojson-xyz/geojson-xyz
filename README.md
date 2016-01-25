@@ -28,7 +28,7 @@ mostly a different way to access that data.
 
 Running
 
-    geojson-xyz airports --
+    geojson-xyz airports -
 
 Means "fuzzy-match airports and output results to stdout". You can substitute
 anything else for 'airports'. Outputting to stdout means you can pipe that
