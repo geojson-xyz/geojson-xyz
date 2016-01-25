@@ -1,6 +1,6 @@
 {
   "name": "geojson-xyz",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "simply get some geojson",
   "main": "index.js",
   "bin": {
