@@ -26,6 +26,14 @@ mostly a different way to access that data.
 
 ## goes well with
 
+To fuzzy-match in realtime, you can install [fzf](https://github.com/junegunn/fzf)
+and then:
+
+    geojson-xyz --list | fzf | xargs wget
+
+Or xargs whatever you want at the end of that. fzf will let you filter
+the list however you want and pipe your choice to the next step.
+
 Running
 
     geojson-xyz airports -
