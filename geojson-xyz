@@ -10,6 +10,7 @@ var inquirer = require('inquirer'),
   xyz = require('./'),
   argv = require('yargs')
     .usage('Get GeoJSON\n$0')
+    .boolean('list')
     .boolean('all')
     .describe('all', 'Get data from all files matching your search.')
     .default('all', false)
@@ -22,8 +23,17 @@ var license = 'SOURCE: http://www.naturalearthdata.com/ Public Domain (no restri
 
 var options = {
   all: argv.all,
-  filter: argv.filter
+  filter: argv.filter,
+  list: argv.list
 };
+
+if (options.list) {
+  var data = require('geojson-xyz-data')['naturalearth-3.3.0'];
+  data.files.forEach(function (file) {
+    console.log(file.url);
+  });
+  return;
+}
 
 if (argv._[0]) {
   var stream;
